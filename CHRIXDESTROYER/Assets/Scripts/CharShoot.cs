@@ -20,7 +20,7 @@ public class CharShoot : MonoBehaviour
 
     private void ShotInput()
     {
-        if (Input.GetKey(KeyCode.Space) && canShoot)
+        if (Input.GetButton("Fire1") && canShoot)
         {
             Shoot();
             canShoot = false;

@@ -8,7 +8,9 @@ public class HealthManager : MonoBehaviour
 {
     [SerializeField] private int health;
     [SerializeField] private TextMeshPro tmp;
-    [SerializeField] private GameObject endText, player, target, explosion;
+    [SerializeField] private TextMeshPro deathText;
+    [SerializeField] private GameObject endText, player, explosion;
+    [SerializeField] private List<GameObject> stuffToDeactivate;
 
     private void Start()
     {
@@ -20,6 +22,7 @@ public class HealthManager : MonoBehaviour
     {
         health--;
         tmp.text = health.ToString();
+        Pool.instance.GetItemFromPool(explosion, player.transform.position, transform.rotation);
         if(health <= 0)
         {
             StartCoroutine(StartAgain());
@@ -28,9 +31,10 @@ public class HealthManager : MonoBehaviour
 
     private IEnumerator StartAgain()
     {
-        Pool.instance.GetItemFromPool(explosion, player.transform.position, transform.rotation);
-        player.SetActive(false);
-        target.SetActive(false);
+        foreach (var stuff in stuffToDeactivate)
+        {
+            stuff.SetActive(false);
+        }
         endText.SetActive(true);
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -22,6 +22,7 @@ public class CharCollisionManager : MonoBehaviour
         if (collision.CompareTag("Ennemy"))
         {
             Pool.instance.GetItemFromPool(anim, transform.position, transform.rotation);
+            collision.gameObject.SetActive(false);
             onHit?.Invoke();
         }
     }

@@ -39,7 +39,7 @@ public class CharMovement : MonoBehaviour
         body.transform.rotation = Quaternion.LookRotation(Vector3.forward, target.position - body.transform.position);
 
         //if (Vector2.Distance(target.position, body.position) > maxDistanceFromTarget)
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire2"))
         {
             body.transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
         }
